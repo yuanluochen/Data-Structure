@@ -14,7 +14,6 @@ typedef struct LNode
     LNode *next;
 } *LinkList;
 
-
 Status InitList_L(LinkList &L)
 {
     L = new LNode;
@@ -76,6 +75,94 @@ int LinkLength_L(LinkList &L)
         p = p->next;
     }
     return i; 
+}
+
+LNode *LocateList_L(LinkList &L, ElemType e)
+{
+    LNode *p = nullptr;
+    p = L->next;
+    
+    while(p && p->elem != e)
+        p = p->next;
+
+    return p;
+}
+
+int LocateElem_L(LinkList &L, ElemType e)
+{
+    LNode *p = nullptr;
+    p = L->next;
+    int j = 0;
+    while(p && p->elem != e)
+    {
+        p = p->next;
+        ++j;
+    }
+    if (p)
+        return j;
+    else    
+        return 0;
+}
+
+Status GetElem_L(LinkList &L, int i, ElemType e)
+{
+    int j = 0;
+    LNode *p = nullptr;
+    p = L->next;
+    while (p && j < i)
+    {
+        p = p->next;
+        j++;
+    }
+
+    if (!p || j > i)
+        return ERROR;
+    
+    e = p->elem;
+    return OK;
+
+}
+
+Status ListInsert_L(LinkList &L, int i, ElemType e)
+{
+    LNode *p = L;
+    int j = 0;
+
+    while(p && j < i - 1) 
+    {
+        p = p->next;
+    }
+
+    if (!p || j > i - 1)
+        return ERROR;
+
+    LNode *s = new LNode;
+
+    s->elem = e;
+
+    s->next = p->next;
+    p->next = s; 
+    
+    return OK;
+}
+
+Status ListDelete(LinkList &L, int i, ElemType e)
+{
+    LNode *p = L;
+    int j = 0;
+    while (p && j < i - 1)
+    {
+        p = p->next;
+    }
+
+    if (!p || j > i - 1)
+        return ERROR;
+
+    LNode *q = p->next;
+    p->next = p->next->next;
+    e = q->elem;
+    delete q;
+    
 }
 
 int main()
