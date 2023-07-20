@@ -14,6 +14,14 @@ typedef struct LNode
     LNode *next;
 } *LinkList;
 
+typedef struct DulNode
+{
+    ElemType date;
+    DulNode *prior;
+    DulNode *next;
+
+} *DulLinkList;
+
 Status InitList_L(LinkList &L)
 {
     L = new LNode;
@@ -145,7 +153,7 @@ Status ListInsert_L(LinkList &L, int i, ElemType e)
     
     return OK;
 }
-
+ 
 Status ListDelete(LinkList &L, int i, ElemType e)
 {
     LNode *p = L;
@@ -162,9 +170,97 @@ Status ListDelete(LinkList &L, int i, ElemType e)
     p->next = p->next->next;
     e = q->elem;
     delete q;
+
+    return OK;
+}
+
+void CreateList_H(LinkList &L, int n)
+{
+    L = new LNode;
+    L->next = nullptr;
+    for (int i = n; i > 0; i--)
+    {
+        LNode *p = new LNode;
+        std::cin >> p->elem;
+        p->next = L->next;
+        L->next = p;
+    }
+}
+
+void CreateList_R(LinkList &L, int n)
+{
+    L = new LNode;
+    L->next = nullptr;
+    LNode *r = L;
+    for (int i = 0; i < n; i++)
+    {
+        LNode *p = new LNode;
+        p->next = nullptr;
+        std::cin >> p->elem;
+        r->next = p;
+        r = p;
+    }
+}
+
+LinkList Connect(LNode *Ta, LNode *Tb)
+{
+    LNode *p = Ta->next;
+    Ta->next = Tb->next->next;
+    delete Tb->next;
+    Tb->next = p;
+    return Tb;
+}
+
+
+DulNode *GetElemP_Dul(DulLinkList &L, int i)
+{
+    DulNode *p = new DulNode;
+    p = L->next;
+    int j = 0;
+    while (p && j < i)
+    {
+        p = p->next;
+    }
+    
+    if (!p || j > i)
+    {
+        return nullptr;
+    }
+
+    return p;
+
+}
+
+Status ListInsert_Dul(DulLinkList &L, int i, ElemType e)
+{
+    DulNode *p = nullptr;
+    if (!(p = GetElemP_Dul(L, i))) 
+        return ERROR;
+    
+    DulNode *s = new DulNode;
+    s->date = e;
+    s->prior = p->prior;
+    p->prior->next = s;
+    s->next = p;
+    p->prior = s;
+
+    return OK;
     
 }
 
+Status ListDelete_Dul(DulLinkList &L, int i)
+{
+    DulNode *p = nullptr;
+    if (!(p = GetElemP_Dul(L, i)))
+        return ERROR;
+    
+    p->prior->next = p->next;
+    p->next->prior = p->prior;
+    delete p;
+    p = nullptr;
+    return OK;
+
+}
 int main()
 {
     LinkList L;
