@@ -1,0 +1,3 @@
+/home/yuanluochen/code/Data-Structure/queue/build/CMakeFiles/queue.dir
+/home/yuanluochen/code/Data-Structure/queue/build/CMakeFiles/edit_cache.dir
+/home/yuanluochen/code/Data-Structure/queue/build/CMakeFiles/rebuild_cache.dir
