@@ -1,0 +1,7 @@
+[
+{
+  "directory": "/home/yuanluochen/code/Data-Structure/build",
+  "command": "/usr/bin/c++ -g -o CMakeFiles/string.dir/test.cpp.o -c /home/yuanluochen/code/Data-Structure/string/test.cpp",
+  "file": "/home/yuanluochen/code/Data-Structure/string/test.cpp"
+}
+]
