@@ -53,10 +53,6 @@ int index_BF(sString &s, sString &t)
     else
         return 0;
 }
-
-
-
-
 int main()
 {
     return 0;
