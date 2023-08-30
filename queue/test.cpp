@@ -101,21 +101,17 @@ status initQueue(linkQueue &q)
     //next域置空
     q.front->next = nullptr;
     return OK;
-
-
 }
 
 status destoryQueue(linkQueue &q)
 {
-
-    qNode *p = nullptr;
+  qNode *p = nullptr;
     while(q.front)
     {
         p = q.front->next;
         delete q.front;
         q.front = p; 
     }
-
     return OK;
 }
 
